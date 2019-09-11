@@ -56,9 +56,15 @@ otherwise
 
 int main() {
 
-  //TO DO: add your code here so that your program
-  //produces output that would be identical to the
-  //given sample run when provided the same input
+ float point_sum = 0;
+ float credit_sum = 0;
+ float points = 0;
+ float gpa = 0;
+ printf("Welcome to GPA calculator!/n");
+ printf("Enter grade and credits for each course below (ctrl-d to end):/n");
+ scanf();
+ float count = 1;
+ printf(" 
 
  return 0;
 }

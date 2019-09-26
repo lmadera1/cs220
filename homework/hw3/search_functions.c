@@ -94,7 +94,33 @@ int find_right(char grid[][MAX_SIZE], int n, int word_len, char word[],
 int find_left (char grid[][MAX_SIZE], int n, int word_len, char word[],
 	       FILE *write_to){
 
-  return -1; // replace this stub
+  word[word_len] = NULL;
+  int num_similar = 0;
+  int answers = 0;
+  
+  //reverse order of word
+  char temp[word_len];
+  int k;
+  for(k = 0; k < word_len/2; k++){
+    temp[k] = word[word_len-k-1];
+    temp[word_len-k-1] = word[k];
+  }
+  temp[k] = word[k];
+  
+  for(int i = 0; i <= n; i++){
+    for(int j = 0; j <= n; j++){
+      if(grid[i][j] == temp[num_similar]){
+	num_similar++;
+      }else{
+	num_similar = 0;
+      }
+      if(num_similar == word_len){
+	fprintf(write_to,"%s %d %d L\n",word,i,j);
+	answers++;
+      }
+    }
+  }
+  return answers;
 
 }
 
@@ -132,7 +158,34 @@ int find_down(char grid[][MAX_SIZE],int n,int word_len,char word[],
 int find_up   (char grid[][MAX_SIZE], int n, int word_len, char word[],
 	       FILE *write_to){
 
-  return -1; // replace this stub
+  word[word_len] = NULL;
+  int num_similar = 0;
+  int answers = 0;
+
+  //revers order of word
+  char temp[word_len];
+  int k;
+  for(k = 0; k < word_len/2; k++){
+    temp[k] = word[word_len-k-1];
+    temp[word_len-k-1] = word[k];
+  }
+  temp[k] = word[k];
+
+  for(int i = 0; i <= n; i++){
+    for(int j = 0; j <= n; j++){
+      if(grid[j][i] == temp[num_similar]){
+	num_similar++;
+      }else{
+	num_similar = 0;
+      }
+      if(num_similar == word_len){
+	fprintf(write_to,"%s %d %d U\n",word,j,i);
+	answers++;
+      }
+    }
+  }
+  
+  return answers;
 
 }
 
@@ -145,12 +198,12 @@ int find_all  (char grid[][MAX_SIZE], int n, int word_len, char word[],
   
   int right =  find_right(grid,n,word_len,word,write_to);
   
-  //int left = find_left(grid,n,word_len,word,write_to);
+  int left = find_left(grid,n,word_len,word,write_to);
 
   int down = find_down(grid,n,word_len,word,write_to);
 
-  //int up = find_up(grid,n,word_len,word,write_to);
-  if (right + down == 0){
+  int up = find_up(grid,n,word_len,word,write_to);
+  if (right + down + left + up == 0){
     word[word_len] = NULL;
     fprintf(write_to,"%s - Not Found\n",word);
   }

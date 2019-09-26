@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "search_functions.h"
 #include <ctype.h>
+#include <string.h>
 
 /*
  * This is the HW3 main function that performs a word search.
@@ -14,16 +15,14 @@
 int main(int argc, char* argv[]) {
 
   //check if enough arguments are made
-  //if (argc < 2){
-  //printf("Please enter a command line argument\n");
-  //return 1;
-  //}
+  if( argc < 2){
+    printf("Please enter a command line argument\n");
+    return 1;
+  }
   
   
   char grid[MAX_SIZE][MAX_SIZE];
-  //int grid_dim = populate_grid(grid,argv[1]);
-
-  int grid_dim = populate_grid(grid,"grid.txt");
+  int grid_dim = populate_grid(grid,argv[1]);
 
   //check if grid_file is readable
   if(grid_dim == -1){
@@ -38,28 +37,14 @@ int main(int argc, char* argv[]) {
   }
   
   //collect words from the user
-
-  char chr;
-  int i;
-  char word[i];
-  while(scanf("%c",&chr) == 1){
-    if (chr == ' '){
-      int word_length = i;
-      i = 0;
-      scanf("%c",&chr);
-      printf("\n");
-      find_all(grid,grid_dim,word_length,word,stdout);
-    }
-    word[i] = chr;
-      
-    //make all letters lowercase
-    word[i] = tolower(word[i]);
-      
-    i++;
+  char word[MAX_SIZE];
+  
+  while(scanf("%s",word) == 1){
+    find_all(grid,grid_dim,strlen(word),word,stdout);
   }
-  int word_length = i;
   printf("\n");
-  find_all(grid,grid_dim,word_length,word,stdout);
+
+  
   return 0;
 
 }

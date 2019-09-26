@@ -84,42 +84,84 @@ void test_file_eq() {
 
 
 void test_populate_grid(){
-
-  assert(1);  //replace this stub!
-
+  
+  char grid[MAX_SIZE][MAX_SIZE];
+    
+  assert(populate_grid(grid,",") == -1);
+  assert(populate_grid(grid,"test4.txt") == -2);
+  assert(populate_grid(grid,"test5.txt") == -2);
+  assert(populate_grid(grid,"grid.txt") == 4);
+  
 }
 
 
 void test_find_right(){
-
-  assert(1);  //replace this stub!
+  
+  char grid[MAX_SIZE][MAX_SIZE];
+  int grid_dim = populate_grid(grid,"grid.txt");
+  FILE *ptfr = fopen("input.txt","w");
+  
+  assert(find_right(grid,grid_dim,3,"pit",ptfr) == 1);
+  
+  assert(find_right(grid,grid_dim,3,"tip",ptfr) == 0);
+  fclose(ptfr);
 
 }
 
 
 void test_find_left(){
+  char grid[MAX_SIZE][MAX_SIZE];
+  int grid_dim = populate_grid(grid,"grid.txt");
 
-  assert(1);  //replace this stub!
+  FILE *ptfr = fopen("input.txt","w");
+  
+  assert(find_left(grid,grid_dim,3,"tip",ptfr) == 1);
+
+  assert(find_left(grid,grid_dim,3,"pit",ptfr) == 0);
+
+  fclose(ptfr);
 }
 
 
 void test_find_down(){
+  char grid[MAX_SIZE][MAX_SIZE];
+  int grid_dim = populate_grid(grid,"grid.txt");
 
-  assert(1);  //replace this stub!
+  FILE *ptfr = fopen("input.txt","w");
+
+  assert(find_down(grid,grid_dim,3,"pop",ptfr) == 1);
+
+  assert(find_down(grid,grid_dim,3,"top",ptfr) == 0);
+
+  fclose(ptfr);
 
 }
 
 
 void test_find_up(){
+  char grid[MAX_SIZE][MAX_SIZE];
+  int grid_dim = populate_grid(grid,"grid.txt");
 
-  assert(1);  //replace this stub!
+  FILE *ptfr = fopen("input.txt","w");
+  
+  assert(find_up(grid,grid_dim,3,"pop",ptfr) == 1);
+
+  assert(find_up(grid,grid_dim,3,"key",ptfr) == 0);
+
+  fclose(ptfr);
 
 }
 
 
 void test_find_all(){
+  char grid[MAX_SIZE][MAX_SIZE];
+  int grid_dim = populate_grid(grid,"grid.txt");
 
-  assert(1);  //replace this stub!
+  FILE *ptfr = fopen("input.txt","w");
+
+  find_all(grid,grid_dim,3,"nope",ptfr);
+  fclose(ptfr);
+  assert(file_eq("input.txt","output.txt"));
 
 }
 

@@ -61,12 +61,14 @@ int populate_grid(char grid[][MAX_SIZE], char filename_to_read_from[]){
 
 
 /* 
- * <Replace this with your own useful comment.> 
+ * Given a word, the grid file, the grid dimension, and the word length, this 
+ * function determines if the word is within the grid file when read from left
+ * to right. The function prints the occurance to a file and returns the 
+ * number of times the word was found.  
  */
 int find_right(char grid[][MAX_SIZE], int n, int word_len, char word[],
 	       FILE *write_to){
   
-  word[word_len] = NULL;
   int num_similar = 0;
   int answers = 0;
   for(int i = 0; i <= n; i++){
@@ -89,12 +91,13 @@ int find_right(char grid[][MAX_SIZE], int n, int word_len, char word[],
 
 
 /* 
- * <Replace this with your own useful comment.> 
+ * Given a word, a grid file, the grid file dimension, and the length of the
+ * word, this function finds where the word appears reading right to left. The
+ * function prints the location of the word to a file and returns the number 
+ * of times the word appeared. 
  */
 int find_left (char grid[][MAX_SIZE], int n, int word_len, char word[],
 	       FILE *write_to){
-
-  word[word_len] = NULL;
   int num_similar = 0;
   int answers = 0;
   
@@ -106,7 +109,8 @@ int find_left (char grid[][MAX_SIZE], int n, int word_len, char word[],
     temp[word_len-k-1] = word[k];
   }
   temp[k] = word[k];
-  
+
+  //find the word in the grid
   for(int i = 0; i <= n; i++){
     for(int j = 0; j <= n; j++){
       if(grid[i][j] == temp[num_similar]){
@@ -126,12 +130,14 @@ int find_left (char grid[][MAX_SIZE], int n, int word_len, char word[],
 
 
 /* 
- * <Replace this with your own useful comment.> 
+ * Given a word, a grid file, the dimention of the grid, and the word lenght,
+ * this function finds the word within the grid file while reading from the 
+ * top down. The function prints the locations of the word to a file and 
+ * returns the number of times the word appeared. 
  */
 int find_down(char grid[][MAX_SIZE],int n,int word_len,char word[],
 	      FILE *write_to){
 
-  word[word_len] = NULL;
   int num_similar = 0;
   int answers = 0;
   for(int i = 0; i <= n; i++){
@@ -153,12 +159,14 @@ int find_down(char grid[][MAX_SIZE],int n,int word_len,char word[],
 
 
 /* 
- * <Replace this with your own useful comment.> 
+ * Given a word, a grid file, the dimension of the grid, and the word length
+ * this function will print to a file the locations where the word appears in
+ * the grid file when read from the bottom up. The function returns the number
+ * of times the word appeared.
  */
 int find_up   (char grid[][MAX_SIZE], int n, int word_len, char word[],
 	       FILE *write_to){
 
-  word[word_len] = NULL;
   int num_similar = 0;
   int answers = 0;
 
@@ -191,7 +199,10 @@ int find_up   (char grid[][MAX_SIZE], int n, int word_len, char word[],
 
 
 /* 
- * <Replace this with your own useful comment.> 
+ * Given a word, a grid file, the dimension of the grid, and the length of the
+ * word, this function determines if the word can be found in the grid when
+ * read from the left, right, down, or up in that order. If the word does not
+ * appear in the grid, the function prints Not Found.  
  */
 int find_all  (char grid[][MAX_SIZE], int n, int word_len, char word[],
 	       FILE *write_to) {
@@ -204,7 +215,6 @@ int find_all  (char grid[][MAX_SIZE], int n, int word_len, char word[],
 
   int up = find_up(grid,n,word_len,word,write_to);
   if (right + down + left + up == 0){
-    word[word_len] = NULL;
     fprintf(write_to,"%s - Not Found\n",word);
   }
   return 0;

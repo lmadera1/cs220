@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include "search_functions.h"
+#include <ctype.h>
 
 
 
@@ -108,8 +109,9 @@ int find_left (char grid[][MAX_SIZE], int n, int word_len, char word[],
     temp[k] = word[word_len-k-1];
     temp[word_len-k-1] = word[k];
   }
-  temp[k] = word[k];
-
+  if(word_len % 2 != 0){
+    temp[k] = word[k];
+  }
   //find the word in the grid
   for(int i = 0; i <= n; i++){
     for(int j = 0; j <= n; j++){
@@ -177,8 +179,10 @@ int find_up   (char grid[][MAX_SIZE], int n, int word_len, char word[],
     temp[k] = word[word_len-k-1];
     temp[word_len-k-1] = word[k];
   }
-  temp[k] = word[k];
-
+  if(word_len % 2 != 0){
+    temp[k] = word[k];
+  }
+  
   for(int i = 0; i <= n; i++){
     for(int j = 0; j <= n; j++){
       if(grid[j][i] == temp[num_similar]){
